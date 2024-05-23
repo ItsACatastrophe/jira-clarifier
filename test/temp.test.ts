@@ -10,7 +10,7 @@ test('SNS Topic Created', () => {
     const template = Template.fromStack(stack);
 
     template.hasResourceProperties('AWS::SNS::Topic', {
-        TopicName: "jira-snooze-topic"
+        TopicName: "jira-clarifier-topic"
     });
 });
 // 

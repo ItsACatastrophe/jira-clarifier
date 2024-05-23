@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ItsACatastrophe/jira-snooze"
+    "url": "https://github.com/ItsACatastrophe/jira-clarifier"
   },
   "author": "Catherine Sanchez <catherine.cat.sanchez@gmail.com>",
   "license": "SEE LICENSE IN LICENSE",
