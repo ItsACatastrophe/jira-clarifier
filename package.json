@@ -1,13 +1,13 @@
 {
-  "name": "jira-snooze",
+  "name": "jira-clarifier",
   "version": "1.0.0",
-  "description": "BE for a jira integration to get some R&R",
+  "description": "BE for a jira LLM integration ",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GuildEducationInc/jira-snooze"
+    "url": "https://github.com/ItsACatastrophe/jira-snooze"
   },
-  "author": "Catherine Sanchez <catherine.sanchez@guild.com>",
+  "author": "Catherine Sanchez <catherine.cat.sanchez@gmail.com>",
   "license": "SEE LICENSE IN LICENSE",
   "bin": {
     "temp": "bin/temp.js"
@@ -22,6 +22,7 @@
     "@types/aws-lambda": "^8.10.125",
     "@types/jest": "^29.5.5",
     "@types/node": "20.7.1",
+    "@types/node-fetch": "^2.6.11",
     "aws-cdk": "2.103.1",
     "aws-cdk-lib": "2.103.1",
     "constructs": "^10.0.0",

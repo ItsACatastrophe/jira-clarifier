@@ -1,0 +1,11 @@
+# Example .env file
+# For code to deploy properly these ENV vars would have to be filled out
+# Ideally these are set programatically by a script or a setup util
+
+STLMSARN=''
+AWS_REGION=''
+AWS_ACCOUNT_ID=''
+JIRA_API_TOKEN_SECRET_KEY=''
+JIRA_DOMAIN=''
+JIRA_USER=''
+LLM_LAMBDA_NAME=''

@@ -7,7 +7,7 @@ import fetch from 'node-fetch';
 let jiraApiToken: string;
 
 export async function handler(event: SNSEvent, context: Context): Promise<string> {
-  console.log(`The lambda was invoked!: \n${JSON.stringify(event)}`)
+  console.log(`The lambda was invoked with event: \n${JSON.stringify(event)}`)
 
   let output = ''
   for (let record of event.Records) {
@@ -25,7 +25,7 @@ export async function handler(event: SNSEvent, context: Context): Promise<string
     const payloadBody = {
       user_id: "hackathon_user",
       channel_id: "",
-      query: `Write a short question about this issue: "${issueDescription}"`,
+      query: `In a bulleted list ask 3 clarifying questions about the most vague parts of this Jira issue: "${issueDescription}"`,
       namespace: "AZURE_OPENAI"
     }
     const llmPayload = {
@@ -77,7 +77,7 @@ async function invokeLlmLambda(payload: any) {
     credentials: lambdaCreds
   });
   const lambdaCommand = new InvokeCommand({
-    FunctionName: 'dai-platform-catalog-slack-llm-orchestrator-pr-15',
+    FunctionName: process.env.LLM_LAMBDA_NAME,
     Payload: JSON.stringify(payload)
   })
   const lambdaResponse = await lambdaClient.send(lambdaCommand);
@@ -91,9 +91,9 @@ class JiraClient {
   auth: string
 
   constructor() {
-    this.jiraDomain = 'https://guild-education.atlassian.net/'
+    this.jiraDomain = process.env.JIRA_DOMAIN!
     this.auth = `Basic ${Buffer.from(
-      `catherine.sanchez@guildeducation.com:${jiraApiToken}`
+      `${process.env.JIRA_USER}:${jiraApiToken}`
     ).toString('base64')}`
   }
 
@@ -115,7 +115,7 @@ class JiraClient {
     const response = await fetch(`${this.jiraDomain}${args.endpoint}`, requestOptions);
     const responseJson = await response.json()
 
-    if (response < 200 || response >= 300) {
+    if (response.status < 200 || response.status >= 300) {
       console.log(`Request to Jira failed with status code: ${response.status}\nResponse: ${responseJson}`)
     }
 
@@ -152,4 +152,3 @@ class JiraClient {
     return await this._request({ endpoint: `rest/api/3/issue/${issueId}/comment`, method: 'POST', body: body })
   }
 }
-// 
